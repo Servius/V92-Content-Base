@@ -1,0 +1,6 @@
+VertexLitGeneric
+{
+	"$basetexture"	"scope/crosshair_m14"
+	"$translucent" 	"1"
+
+}

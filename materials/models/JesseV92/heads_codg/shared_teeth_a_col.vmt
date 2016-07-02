@@ -1,0 +1,13 @@
+"VertexLitGeneric"
+{
+	"$basetexture" "models/jessev92/heads_codg/shared_teeth_a_col"
+	"$bumpmap" "models/jessev92/heads_codg/shared_teeth_a_nml"
+	"$model" "1"
+	"$phong" "1"
+	"$phongexponent" "25"
+	"$phongboost"	".3"
+	"$phongfresnelranges"	"[.5 3 48]"
+
+	"$blendtintbybasealpha" "1" // alpha channel of $basetexture: color mask.
+ 	"$blendtintcoloroverbase" "0" // blend mode. anything =/= 0 is ugly!
+}

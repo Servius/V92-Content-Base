@@ -1,0 +1,11 @@
+"AddonInfo"
+{
+	"name"				"V92 Addons"
+	"version"			"1.0.0"
+	"update"			"31 August 2010"
+	"author_name"		"Jesse V92 / Lucky9Two"
+	"author_email"		"gmod.jessevanover92.net"
+	"author_url"		"http://jessevanover92.net"
+	"info"				""
+	"override"			"0"
+}

@@ -1,0 +1,17 @@
+{
+	"title"		:	"V92 Code Bases",
+	"type"		:	"model",
+	"ignore"	:
+	[
+		"*.psd",
+		"*.vcproj",
+		"*.svn*",
+		"*.txt*",
+		"*.dua*",
+		"*.ztmp*",
+		"*.jpg*",
+		"*.bmp*",
+		"*.vtf_bak*",
+		"*.tga*"
+	]
+}

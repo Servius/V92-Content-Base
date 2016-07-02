@@ -1,0 +1,25 @@
+
+vertexlitgeneric
+{
+
+	$baseTexture		models/JesseV92/heads_hl2/hd/citizen_sheet_d
+	$bumpmap			models/JesseV92/heads_hl2/hd/citizen_sheet_b
+	$lightwarptexture	models/jessev92/detail/w_cloth
+	
+	$ambientocclusion	1
+	$halflambert		1
+	$nocull				1
+	$surfaceprop		flesh
+	
+	$phong					1
+	$phongexponent			5
+	$bumpmapalphaphongmask	1
+	$phongboost				1
+	$phongfresnelranges		"[0 0.5 1]"
+	
+	$detail				models/jessev92/detail/cloth
+	$detailscale        36
+	$detailblendfactor  0.95
+	$detailblendmode	0
+
+}

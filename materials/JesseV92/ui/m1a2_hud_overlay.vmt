@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$basetexture" "jessev92/ui/m1a2_hud_overlay"
+	"$vertexcolor" 		1 
+	"$vertexalpha" 		1 
+	"$nolod" 		1 
+}
