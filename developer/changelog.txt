@@ -1,0 +1,68 @@
+
+---------------------------------------------
+V92 SWep Base Changes
+---------------------------------------------
+- Fixed weapon drop function
+- Adjusted muzzle flash effects
+
+---------------------------------------------
+V92 SWep Base Changes
+---------------------------------------------
+NYI = Not Yet Implemented
+- Added IsMounted check to the CS:S Headshot effect
+- Redid the validity checks to be more optimized (Thanks IceGT_)
+- Added stock in/out function
+- Added stock folded iron sight function
+- Added new icons for fire modes
+- Added new icons for stock modes
+- Added new icons for suppressor modes
+- Added options menu to easily change base settings (Q > Options > V92 > Base )
+- Added reset button for options by request
+- Added the ability for melee weapons to holster
+- Fixed the melee weapon animations
+- Added holster animations to the dynamic animation tables
+- Added crouched holster animations to the dynamic animation tables
+- Changed the think rate to 2 times / second to lower CPU load
+- Added animation in first person when safety is on
+- Fixed the view/world model changing function
+- Added SWEP.ViewModelDefault
+- Added SWEP.WorldModelDefault
+- Added SWEP.AutoSwitchFrom/To to the v92_int_blank SWep to prevent errors with CW/NS/etc
+- Added CVar: VNT_SWep_Base_HUD_SuppX <Integer>
+- Added CVar: VNT_SWep_Base_HUD_SuppY <Integer>
+- Added CVar: VNT_SWep_Base_TracerToggle <Boolean>
+- Added CVar: VNT_SWep_Base_FlashToggle <Boolean>
+- Added CVar: VNT_SWep_Base_ShellToggle <Boolean>
+- Added CVar: VNT_SWep_Base_ShellTime <Integer>
+- Added CVar: VNT_SWep_Base_SpeedWeight <Boolean> (NYI)
+- Added CVar: VNT_SWep_Base_SpeedToggle <Boolean>
+- Added CVar: VNT_SWep_Base_Speed_Walk <Integer>
+- Added CVar: VNT_SWep_Base_Speed_Run <Integer>
+- Added CVar: VNT_SWep_Base_RecoilMul <Float>
+- Added CVar: VNT_SWep_Base_AccuracyMul <Float>
+- Added CVar: VNT_SWep_Base_JamToggle <Boolean> (NYI)
+- Added CVar: VNT_SWep_Base_JamChance <Integer> (NYI)
+- Added CVar: VNT_SWep_Base_RichochetLimit <Integer> (NYI)
+- Added CVar: VNT_SWep_Base_SpawnUnloaded <Boolean> (NYI)
+- Added CVar: VNT_SWep_Base_SpawnAmmo <Boolean> (NYI)
+- Changed CVar Name: VNT_SWep_Base_RoFX >> VNT_SWep_Base_HUD_RoFX <Integer>
+- Changed CVar Name: VNT_SWep_Base_RoFY >> VNT_SWep_Base_HUD_RoFY <Integer>
+- Changed CVar Name: VNT_SWep_Base_BipodX >> VNT_SWep_Base_HUD_DeployX <Integer>
+- Changed CVar Name: VNT_SWep_Base_BipodY >> VNT_SWep_Base_HUD_DeployY <Integer>
+
+---------------------------------------------
+HL2X: Shotguns Changes
+---------------------------------------------
+- Removed SPAS-12 (Folded Stock)
+- Removed SPAS-12 (Unfolded stock)
+- Added SPAS-12 (Dynamic Stock)
+
+---------------------------------------------
+HEAT Pack Changes
+---------------------------------------------
+- Added additional checks to the SR-9T RT scope to prevent errors when the player is not valid
+
+---------------------------------------------
+Hitman BAR Mk.II Safari Changes
+---------------------------------------------
+- Added additional checks to the BAR RT scope to prevent errors when the player is not valid

@@ -50,7 +50,6 @@ SWEP.ViewModel = Model( "" ) -- (String) View model - v_*
 SWEP.ViewModelDefault = nil -- (String) View model - v_* ; used to reset the view model since self.ViewModel isn't recallable
 SWEP.WorldModel = Model( "" ) -- (String) World model - w_*
 SWEP.WorldModelDefault = nil -- (String) World model - w_* ; used to reset the world model since self.WorldModel isn't recallable
-
 SWEP.UseHands = false -- (Boolean) Leave at false unless the model uses C_Arms
 ------------------------------------------------------
 --	Gun Types										--	Set the type of weapon
@@ -2808,7 +2807,7 @@ function SWEP:Throw( )
 	--	If we're owner, a player, valid, and alive, and our delay is expired
 	if IsValid( self.Owner ) then
 	
-		if self.Owner:IsPlayer() and self.Owner:Alive() and self.ActionDelay <= CurTime( ) then
+		if self.Owner:IsPlayer() and self.Owner:Alive() then
 				
 			--	Play our holster animation
 			
@@ -2828,19 +2827,19 @@ function SWEP:Throw( )
 
 			-- ents.Create only exists in the server realm
 			--	Create our weapon entity
-			local Tosser = ents.Create( tostring(self.WeaponEntityName) )
-			Tosser:SetAngles( self.Owner:EyeAngles( ) )
-			Tosser:SetPos( pos )
-			Tosser:Spawn( )
-			Tosser:Activate( )
-			--	Activate our physics
-			local phys = Tosser:GetPhysicsObject( )
-			phys:SetVelocity( self.Owner:GetAimVector( ) * 64 )
-			phys:AddAngleVelocity( Vector( 47 , 0 , 0 ) )
-			--	Remove the weapon from our slots
-			self.Owner:StripWeapon( self.WeaponName )
-			--	And return to the last used weapon
 			if SERVER then
+				local Tosser = ents.Create( tostring(self.WeaponEntityName) )
+				Tosser:SetAngles( self.Owner:EyeAngles( ) )
+				Tosser:SetPos( pos )
+				Tosser:Spawn( )
+				Tosser:Activate( )
+				--	Activate our physics
+				local phys = Tosser:GetPhysicsObject( )
+				phys:SetVelocity( self.Owner:GetAimVector( ) * 256 )
+				phys:AddAngleVelocity( Vector( 47 , 0 , 0 ) )
+				--	Remove the weapon from our slots
+				self.Owner:StripWeapon( self.WeaponName )
+				--	And return to the last used weapon
 				RunConsoleCommand( "lastinv" )
 			end
 		end
@@ -2856,57 +2855,38 @@ function SWEP:Jammed( )
 	if IsValid( self.Owner ) then
 	
 		if self.Owner:IsPlayer() and self.Owner:Alive() and self.ActionDelay <= CurTime( ) then
-				
+			
+			if not IsFirstTimePredicted( ) then return end
+
 			--	If we're a small jam then
 			if self:GetVNTSBJammedL( ) == true then
 				--	Print the text
 
 				self.Owner:PrintMessage( HUD_PRINTCENTER , "Magazine Jam!" )
 
-
 				--	Toggle out of iron sights
 				if self:GetVNTSBIronSighted( ) == true then
 					self:ToggleIronsights( )
 				end
 
-				--	get the duration of the sequence and run the function
-				timer.Simple( self.Owner:GetViewModel( ):SequenceDuration( ) , function( )
-					--	if the player or weapon isn't valid, and we're not predicted, and the owner isn't alive then quit
-					if ( not IsValid( self.Owner ) or not IsValid( self ) ) or ( not IsFirstTimePredicted( ) or not self.Owner:Alive( ) ) then return end
+				--	play the holster animation
+				--self:SendWeaponAnim( ACT_VM_HOLSTER )
+				--	if we're a pistol then
+				if ( self.WeaponType == 2 ) then
+					--	play the pistol jam sound
+					self:EmitSound( self.SND_JamSmallPistol )
+				else
+					--	else play the rifle jam sound
+					self:EmitSound( self.SND_JamSmall )
+				end
 
-					--	play the holster animation
-					--self:SendWeaponAnim( ACT_VM_HOLSTER )
-					--	if we're a pistol then
-					if ( self.WeaponType == 2 ) then
-						--	play the pistol jam sound
-						self:EmitSound( self.SND_JamSmallPistol )
-					else
-						--	else play the rifle jam sound
-						self:EmitSound( self.SND_JamSmall )
-					end
-
-					--	get our sequence + 2 and run func
-					timer.Simple( self.Owner:GetViewModel( ):SequenceDuration( ) + 2 , function( )
-						--	if the player or weapon isn't valid, and we're not predicted, and the owner isn't alive then quit
-						if ( not IsValid( self.Owner ) or not IsValid( self ) ) or ( not IsFirstTimePredicted( ) or not self.Owner:Alive( ) ) then return end
-
-						if self.SuppressorType == 2 then
-						else
-						end
-
-						--self:SendWeaponAnim( ACT_VM_DRAW_SILENCED )
-						--self:SendWeaponAnim( ACT_VM_DRAW )
-						--	get the sequence duration of the draw anim
-						timer.Simple( self.Owner:GetViewModel( ):SequenceDuration( ) , function( )
-							--	if the player or weapon isn't valid, and we're not predicted, and the owner isn't alive then quit
-							if ( not IsValid( self.Owner ) or not IsValid( self ) ) or ( not IsFirstTimePredicted( ) or not self.Owner:Alive( ) ) then return end
-							--	clear the chamber
-							self:TakePrimaryAmmo( 1 )
-							--	we're not jammed
-							self:SetVNTSBJammedL( false )
-						end )
-					end )
-				end )
+				self.ActionDelay = ( CurTime( ) + self.Owner:GetViewModel( ):SequenceDuration( ) + 2 )
+				self:SetNextPrimaryFire( CurTime( ) + self.Owner:GetViewModel( ):SequenceDuration( ) + 2 )
+				self:SetNextSecondaryFire( CurTime( ) + self.Owner:GetViewModel( ):SequenceDuration( ) + 2 )
+				
+				self:TakePrimaryAmmo( 1 )
+				--	we're not jammed
+				self:SetVNTSBJammedL( false )
 			end
 
 			--	If we're a big jam then
@@ -2921,44 +2901,21 @@ function SWEP:Jammed( )
 					self:ToggleIronsights( )
 				end
 
-				--	get the duration of the sequence and run the function
-				timer.Simple( self.Owner:GetViewModel( ):SequenceDuration( ) , function( )
-					--	if the player or weapon isn't valid, and we're not predicted, and the owner isn't alive then quit
-					if ( not IsValid( self.Owner ) or not IsValid( self ) ) or ( not IsFirstTimePredicted( ) or not self.Owner:Alive( ) ) then return end
+				--	play the holster animation
+				--self:SendWeaponAnim( ACT_VM_HOLSTER )
+				--	if we're a pistol then
+				if ( self.WeaponType == 2 ) then
+					--	play the pistol jam sound
+					self:EmitSound( self.SND_JamLargePistol )
+				else
+					--	else play the rifle jam sound
+					self:EmitSound( self.SND_JamLarge )
+				end
 
-					--	play the holster animation
-					--self:SendWeaponAnim( ACT_VM_HOLSTER )
-					--	if we're a pistol then
-					if ( self.WeaponType == 2 ) then
-						--	play the pistol jam sound
-						self:EmitSound( self.SND_JamLargePistol )
-					else
-						--	else play the rifle jam sound
-						self:EmitSound( self.SND_JamLarge )
-					end
-
-					--	get our sequence + 2 and run func
-					timer.Simple( self.Owner:GetViewModel( ):SequenceDuration( ) + 2 , function( )
-						--	if the player or weapon isn't valid, and we're not predicted, and the owner isn't alive then quit
-						if ( not IsValid( self.Owner ) or not IsValid( self ) ) or ( not IsFirstTimePredicted( ) or not self.Owner:Alive( ) ) then return end
-
-						if self.SuppressorType == 2 then
-						else
-						end
-
-						--self:SendWeaponAnim( ACT_VM_DRAW_SILENCED )
-						--self:SendWeaponAnim( ACT_VM_DRAW )
-						--	get the sequence duration of the draw anim
-						timer.Simple( self.Owner:GetViewModel( ):SequenceDuration( ) , function( )
-							--	if the player or weapon isn't valid, and we're not predicted, and the owner isn't alive then quit
-							if ( not IsValid( self.Owner ) or not IsValid( self ) ) or ( not IsFirstTimePredicted( ) or not self.Owner:Alive( ) ) then return end
-							--	clear the chamber
-							self:TakePrimaryAmmo( 1 )
-							--	we're not jammed
-							self:SetVNTSBJammedB( false )
-						end )
-					end )
-				end )
+				--	clear the chamber
+				self:TakePrimaryAmmo( 1 )
+				--	we're not jammed
+				self:SetVNTSBJammedB( false )
 			end
 		end
 	end
