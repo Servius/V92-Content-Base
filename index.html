@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="UTF-8">
+    <title>V92-Content-Base by Lucky9Two</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">V92-Content-Base</h1>
+      <h2 class="project-tagline">A Versatile Weapon &amp; Content Base for Garry&#39;s Mod</h2>
+      <a href="https://github.com/Lucky9Two/V92-Content-Base" class="btn">View on GitHub</a>
+      <a href="https://github.com/Lucky9Two/V92-Content-Base/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/Lucky9Two/V92-Content-Base/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h3>
+<a id="v92-content-base" class="anchor" href="#v92-content-base" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>V92-Content-Base</h3>
+
+<p>A Versatile Weapon &amp; Content Base for Garry's Mod</p>
+
+<p>This is a custom weapon and content base system for Garry's Mod. It supports a large variety of features such as suppressors, stocks, iron sights, fire modes, bipods, grenade launchers, and much more.</p>
+
+<p>Read the included documentation for developers in the 'developer' branch for info on how to get started, or contact me directly on Steam.
+<a href="http://steamcommunity.com/id/JesseVanover/">http://steamcommunity.com/id/JesseVanover/</a></p>
+
+<h2>
+<a id="current-features" class="anchor" href="#current-features" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Current Features</h2>
+
+<ul>
+<li>A wide range of custom ammo types</li>
+<li>Multiple fire modes: Semi/Burst/Auto/Safety, and any combination thereof!</li>
+<li>Support for grenade launcher modules</li>
+<li>Support for magazine-based projectile weapons</li>
+<li>Support for suppressors: Model swap &amp; animated (CS:S)</li>
+<li>Support for bipods: Model swap &amp; animated</li>
+<li>Support for melee weapons: Not bullet firing weapons either!</li>
+<li>Support for Akimbo weapons</li>
+<li>Support for stock folding/unfolding </li>
+<li>Bullet penetration based on weapon callibre</li>
+<li>Automatic animation detection</li>
+<li>Support for overlay sniper rifles</li>
+<li>Support for Render Target sniper rifles</li>
+<li>Support for zoom toggling</li>
+<li>Support for shotguns</li>
+<li>Shell reloading support</li>
+<li>Custom muzzle flashes</li>
+<li>Custom shell ejections</li>
+<li>Dynamic world animations: Aiming? Holstered? You'll show it! </li>
+</ul>
+
+<h2>
+<a id="keys--default-function--swep-base-function" class="anchor" href="#keys--default-function--swep-base-function" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Key(s) | Default Function | SWep Base Function</h2>
+
+<ul>
+<li>MOUSE1 | Fire | Fire</li>
+<li>MOUSE2 | AltFire | Toggle Iron Sights</li>
+<li>R | Reload | Reload</li>
+<li>MOUSE1+E | Fire + Use | Toggle Deployable (If applicable)</li>
+<li>MOUSE2+E | AltFire + Use | Cycle Fire Modes</li>
+<li>LALT+R | Walk + Reload | Melee (If applicable)</li>
+<li>LALT+MOUSE2 | Walk + AltFire | Toggle Suppressor (If applicable)</li>
+<li>(When Holstered) E+R | Use + Reload | Throw Weapon</li>
+<li>(When Scoped In) E+MOUSE2 | Use + AltFire | Cycle Zooms (If applicable)</li>
+</ul>
+
+<h2>
+<a id="bases-for-you-to-use" class="anchor" href="#bases-for-you-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bases for You to Use</h2>
+
+<h1>
+<a id="file--purpose" class="anchor" href="#file--purpose" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>File | Purpose</h1>
+
+<ul>
+<li>weapons/v92_base_swep | My SWep Base</li>
+<li>entities/v92_base_projectile | Base for tank shell entities</li>
+<li>entities/v92_base_wepent | Base for weapon entities</li>
+<li>entities/v92_base_ammobox | Base for ammo cartons/boxes</li>
+<li>entities/v92_base_ammocrate | Base for ammo crates; think HL2</li>
+<li>entities/v92_base_npc | Upcoming SNPC base; unfinished</li>
+<li>entities/v92_base_magazine | Upcoming weapon magazine base; unfinished</li>
+</ul>
+
+<h2>
+<a id="some-setup-code" class="anchor" href="#some-setup-code" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Some Setup Code</h2>
+
+<ul>
+<li>autorun/sh_v92_base &gt;&gt; Main base setup code; all definitions and constants are here</li>
+<li>autorun/sh_v92_base_swep &gt;&gt; Common SWep functions</li>
+<li>autorun/sh_v92_snd_css &gt;&gt; CS:S sound tables</li>
+<li>autorun/sh_v92_snd_dod &gt;&gt; DoD:S / R&amp;L sound tables</li>
+<li>autorun/sh_v92_snd_halo &gt;&gt; Halo / Sci-Fi sound tables</li>
+<li>autorun/sh_v92_snd_hl2 &gt;&gt; Hl2 sound tables</li>
+<li>autorun/sh_v92_snd_insmic &gt;&gt; INS:MIC sound tables</li>
+<li>autorun/sh_v92_snd_military &gt;&gt; Battlefield / Military sound tables</li>
+<li>autorun/sh_v92_vehicle_anims &gt;&gt; Vehicle animations</li>
+</ul>
+
+<h2>
+<a id="various-effects-you-can-call-on" class="anchor" href="#various-effects-you-can-call-on" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Various Effects You Can Call On</h2>
+
+<ul>
+<li>effects/fx_afterburner</li>
+<li>effects/fx_airburst</li>
+<li>effects/fx_explosion_movie</li>
+<li>effects/fx_heatwave</li>
+<li>effects/fx_impact_bullet</li>
+<li>effects/fx_impact_shell</li>
+<li>effects/fx_rocket_trail</li>
+<li>effects/fx_shelleject</li>
+<li>effects/fx_muzzleflash</li>
+<li>effects/fx_smoke_tracks </li>
+</ul>
+
+<h2>
+<a id="sweps" class="anchor" href="#sweps" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>SWeps</h2>
+
+<ul>
+<li>Unarmed Hands SWep with World Animations</li>
+<li>v92_int_blank &gt;&gt; A hidden SWep that is used to model swap the weapon base for bipods and suppressors </li>
+</ul>
+
+<h2>
+<a id="many-tank-shells-for-use-in-scars" class="anchor" href="#many-tank-shells-for-use-in-scars" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Many Tank Shells for Use in SCars</h2>
+
+<ul>
+<li>20mm</li>
+<li>25mm</li>
+<li>37mm</li>
+<li>40mm</li>
+<li>40x46mm</li>
+<li>50mm</li>
+<li>76mm</li>
+<li>88mm</li>
+<li>90mm</li>
+<li>100mm</li>
+<li>105mm</li>
+<li>120mm</li>
+<li>125mm</li>
+<li>128mm</li>
+<li>150mm</li>
+<li>155mm</li>
+<li>M68 ALIM</li>
+<li>M79 Rocket</li>
+<li>MAC Shell</li>
+<li>Rocket</li>
+<li>Stinger</li>
+<li>TOW</li>
+<li>Zuni</li>
+</ul>
+
+<h2>
+<a id="materials" class="anchor" href="#materials" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Materials</h2>
+
+<ul>
+<li>Materials/models/jessev92/heads_hl2/hd/* &gt;&gt; HD HL2 Citizen Heads/Bodies</li>
+<li>Materials/engine/* &gt;&gt; HD Eye Shaders</li>
+<li>Materials/models/JesseV92/detail/wreck_d &gt;&gt; Wreck overlay detail texture </li>
+</ul>
+
+<h2>
+<a id="detail-textures" class="anchor" href="#detail-textures" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Detail Textures</h2>
+
+<ul>
+<li>Materials/models/JesseV92/detail/cloth2</li>
+<li>Materials/models/JesseV92/detail/ffcm13_ash</li>
+<li>Materials/models/JesseV92/detail/ffcm13_dirt</li>
+<li>Materials/models/JesseV92/detail/ffcm13_metal</li>
+<li>Materials/models/JesseV92/detail/ffcm13_noise</li>
+<li>Materials/models/JesseV92/detail/ffcm13_plaster</li>
+<li>Materials/models/JesseV92/detail/ffcm13_rock</li>
+<li>Materials/models/JesseV92/detail/ffcm13_sprites</li>
+<li>Materials/models/JesseV92/detail/ffcm13_wood</li>
+<li>Materials/models/JesseV92/detail/leather</li>
+<li>Materials/models/JesseV92/detail/leather2</li>
+<li>Materials/models/JesseV92/detail/metal1</li>
+<li>Materials/models/JesseV92/detail/metal2</li>
+<li>Materials/models/JesseV92/detail/metal3</li>
+<li>Materials/models/JesseV92/detail/skin1</li>
+<li>Materials/models/JesseV92/detail/skin2 </li>
+</ul>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/Lucky9Two/V92-Content-Base">V92-Content-Base</a> is maintained by <a href="https://github.com/Lucky9Two">Lucky9Two</a>.</span>
+
+        <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
+      </footer>
+
+    </section>
+
+  
+  </body>
+</html>
