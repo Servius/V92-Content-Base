@@ -3,14 +3,10 @@ VertexLitGeneric
 {
 
 	$baseTexture				models/jessev92/hawx/weapon/cbu94_d
-
+	$bumpmap					dev/bump_normal
+	$lightwarptexture			dev/identitylightwarp
+	
 	$halflambert				1
 	$ambientocclusion			1
-	$nocull						0
-	
-	$detail						detail/metal_detail_01
-	$detailscale				48
-	$detailblendfactor			0.5
-	$detailblendmode			0
-	
+
 }

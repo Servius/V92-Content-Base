@@ -1,0 +1,24 @@
+UnlitGeneric
+{
+	$basetexture		models/ins1ons\lense\lense_rt
+	$nocull				1
+	$model				1
+	
+	$detail						models/ins1ons\lense\crosshair_m4
+	$detailscale				1
+	$detailblendfactor			1
+	$detailblendmode			0
+	
+	Proxies
+	{
+		Scope
+		{
+			textureScrollVar	$baseTextureTransform
+			fieldOfView			10
+			scopeGeometry			24 // 1 / sin( arctan( radius / ( 2 * length ) ) )
+			crosshairTexture		models/ins1ons/lense/crosshair_m14
+		}
+	}
+}
+
+

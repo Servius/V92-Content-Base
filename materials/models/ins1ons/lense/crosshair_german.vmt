@@ -1,0 +1,5 @@
+VertexLitGeneric
+{
+	"$basetexture"	"models/ins1ons/lense/crosshair_german"
+	"$translucent" 	"1"
+}

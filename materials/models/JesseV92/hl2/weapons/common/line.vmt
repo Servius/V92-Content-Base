@@ -1,0 +1,14 @@
+
+UnLitGeneric
+{
+
+	$baseTexture				models/jessev92/hl2/weapons/common/line_d
+	$bumpmap					dev/bump_normal
+
+	$halflambert				1
+	$ambientocclusion			1
+	$additive					1
+	$translucent				1
+	$nocull						1
+	
+}

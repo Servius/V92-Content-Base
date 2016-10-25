@@ -1,0 +1,6 @@
+"UnlitGeneric"
+{
+	"$basetexture"	"models/ins1ons\lense\circle"
+	"$translucent" 	"1"
+	"$model"		"1"
+}

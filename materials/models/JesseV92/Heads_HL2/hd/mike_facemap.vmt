@@ -4,7 +4,7 @@ vertexlitgeneric
 
 	$baseTexture		models/JesseV92/heads_hl2/hd/mike2_d
 	$bumpmap			models/JesseV92/heads_hl2/hd/mike_b
-	$lightwarptexture	models/jessev92/detail/w_gen
+	$lightwarptexture	dev/identitylightwarp
 	
 	$ambientocclusion	1
 	$halflambert		1

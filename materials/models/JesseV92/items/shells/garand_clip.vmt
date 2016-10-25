@@ -1,0 +1,18 @@
+
+VertexLitGeneric
+{
+
+	$basetexture				models/jessev92/items/shells/garand_clip_d
+	$bumpmap					dev/bump_normal
+	$lightwarptexture			dev/identitylightwarp
+	
+	$halflambert				1
+	$ambientocclusion			1
+
+	$phong						1
+	$phongexponent				90
+	$phongboost					3
+	$phongtint					"[ 0.93 0.85 0.68 ]"
+	$phongfresnelranges			"[ 0.5 0.6 1.0 ]"
+
+}

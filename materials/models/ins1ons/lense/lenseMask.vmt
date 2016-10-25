@@ -1,0 +1,7 @@
+"UnlitGeneric"
+{
+	"$basetexture" "models/ins1ons/lense/lenseMask"
+	"$nocull" 1
+	"$nodecal" 1
+	"$translucent" 1
+}

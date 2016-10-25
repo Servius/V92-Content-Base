@@ -1,6 +1,6 @@
 {
-	"title"		:	"V92 Code Bases",
-	"type"		:	"model",
+	"title"		:	"V92 Content Base",
+	"type"		:	"weapon",
 	"ignore"	:
 	[
 		"*.psd",

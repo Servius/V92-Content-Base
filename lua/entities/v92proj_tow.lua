@@ -1,6 +1,4 @@
-
-AddCSLuaFile()
-
+AddCSLuaFile( )
 --[[
 
 Updated 28 July 2014
@@ -19,174 +17,154 @@ I'm open to suggestions that are within reason.
 TL;DR - Contact me before releasing stuff, and contact me about things you want added.
 
 ]]
-
 ENT.Base = "base_anim"
 ENT.Type = "anim"
-
-ENT.PrintName		= "TOW"
-ENT.Author			= "V92"
-ENT.Category 		= "92nd Development Unit"
-ENT.Contact    		= ""
-ENT.Purpose 		= "Destroy!"
-ENT.Instructions 	= "" 
-
-ENT.Spawnable			= false
-ENT.AdminOnly		= false
-
+ENT.PrintName = "TOW"
+ENT.Author = "V92"
+ENT.Category = "92nd Development Unit"
+ENT.Contact = ""
+ENT.Purpose = "Destroy!"
+ENT.Instructions = ""
+ENT.Spawnable = false
+ENT.AdminOnly = false
 --if SERVER then
-
-ENT.ExplosionDel = CurTime() + 0.2
+ENT.ExplosionDel = CurTime( ) + 0.2
 ENT.ExplodeOnce = false
 ENT.EntAngs = nil
 ENT.SpriteTrail = nil
 
+function ENT:SpawnFunction( ply , tr )
+	ent:Spawn( )
+	ent:Activate( )
+	ent.Owner = ply
+	ent:GetPhysicsObject( ):SetMass( 1 )
 
-function ENT:SpawnFunction( ply, tr ) 
- 	ent:Spawn()
- 	ent:Activate() 
- 	ent.Owner = ply
-	ent:GetPhysicsObject():SetMass(1)
-	return ent 
-	
+	return ent
 end
 
-function ENT:Initialize()
+function ENT:Initialize( )
+	self:SetModel( "models/BF2/weapons/Predator/predator_rocket.mdl" )
+	self:SetOwner( self.Owner )
+	self:PhysicsInit( SOLID_VPHYSICS )
+	self:SetMoveType( MOVETYPE_VPHYSICS )
+	self:SetSolid( SOLID_VPHYSICS )
+	local phys = self:GetPhysicsObject( )
 
-	self:SetModel("models/BF2/weapons/Predator/predator_rocket.mdl")
-	self:SetOwner(self.Owner)
-	self:PhysicsInit(SOLID_VPHYSICS)
-	self:SetMoveType(MOVETYPE_VPHYSICS)
-	self:SetSolid(SOLID_VPHYSICS)
-	
-    local phys = self:GetPhysicsObject()
-	if(phys:IsValid()) then phys:Wake() end
+	if ( phys:IsValid( ) ) then
+		phys:Wake( )
+	end
 
-	self.EntAngs = self:GetAngles()	
-	phys:EnableDrag(true)
-	self.SpriteTrail = util.SpriteTrail(self.Entity, 0, Color(200,200,200,255), true, 15, 35, 15, 1/(15+1)*0.5, "trails/smoke.vmt")
-
-	//self:SetColor(Color(0,0,0,255))
-	//self:SetMaterial("models/shiny")
-
-	//self.MissileSound = CreateSound(self.Entity,"weapons/rpg/rocket1.wav")
-	//self.MissileSound:Play()
-	
-	self.ExplosionDel = CurTime() + 0.1
+	self.EntAngs = self:GetAngles( )
+	phys:EnableDrag( true )
+	self.SpriteTrail = util.SpriteTrail( self.Entity , 0 , Color( 200 , 200 , 200 , 255 ) , true , 15 , 35 , 15 , 1 / ( 15 + 1 ) * 0.5 , "trails/smoke.vmt" )
+	--self:SetColor(Color(0,0,0,255))
+	--self:SetMaterial("models/shiny")
+	--self.MissileSound = CreateSound(self.Entity,"weapons/rpg/rocket1.wav")
+	--self.MissileSound:Play()
+	self.ExplosionDel = CurTime( ) + 0.1
 	self.ExplosionDel = -1
 end
 
 -------------------------------------------PHYS COLLIDE
-function ENT:PhysicsCollide( data, phys ) 
+function ENT:PhysicsCollide( data , phys )
 	ent = data.HitEntity
-	
-	if self.ExplosionDel < CurTime() then
-		self:DoExplode()
+
+	if self.ExplosionDel < CurTime( ) then
+		self:DoExplode( )
 	else
-		self:Dull()
+		self:Dull( )
 	end
 end
+
 -------------------------------------------PHYSICS
 function ENT:PhysicsUpdate( physics )
 	if self.ExplodeOnce == false then
-		local entphys = self:GetPhysicsObject()
-
-		phys = self:GetPhysicsObject()
-		local veloc = phys:GetVelocity()
-
-		local AimVec = self:GetVelocity():GetNormalized():Angle( )					
-		
-		self.EntAngs.p = math.ApproachAngle( self.EntAngs.p, AimVec.p, 0.5 )
-		self.EntAngs.r = math.ApproachAngle( self.EntAngs.r, AimVec.r, 0.5 )
-		self.EntAngs.y = math.ApproachAngle( self.EntAngs.y, AimVec.y, 0.5 )
-		self:SetAngles( self.EntAngs )									
-
-		phys:EnableGravity(false)
-
-		phys:SetVelocity(veloc * 5)	--Can't go any faster :[
+		local entphys = self:GetPhysicsObject( )
+		phys = self:GetPhysicsObject( )
+		local veloc = phys:GetVelocity( )
+		local AimVec = self:GetVelocity( ):GetNormalized( ):Angle( )
+		self.EntAngs.p = math.ApproachAngle( self.EntAngs.p , AimVec.p , 0.5 )
+		self.EntAngs.r = math.ApproachAngle( self.EntAngs.r , AimVec.r , 0.5 )
+		self.EntAngs.y = math.ApproachAngle( self.EntAngs.y , AimVec.y , 0.5 )
+		self:SetAngles( self.EntAngs )
+		phys:EnableGravity( false )
+		phys:SetVelocity( veloc * 5 ) --Can't go any faster :[
 	end
 end
--------------------------------------------DAMAGE
-function ENT:OnTakeDamage(dmg)
 
-	if self.ExplosionDel < CurTime() && not(dmg:IsExplosionDamage()) then
+-------------------------------------------DAMAGE
+function ENT:OnTakeDamage( dmg )
+	if self.ExplosionDel < CurTime( ) and not ( dmg:IsExplosionDamage( ) ) then
 		self:SetCollisionGroup( 3 )
 	end
 
-	if not(dmg:IsExplosionDamage()) then
-		self:DoExplode()
+	if not ( dmg:IsExplosionDamage( ) ) then
+		self:DoExplode( )
 	end
 end
 
 -------------------------------------------THINK
-function ENT:Think()
-	self:GetPhysicsObject():Wake()
+function ENT:Think( )
+	self:GetPhysicsObject( ):Wake( )
 
-	if self.ExplosionDel < CurTime() then
+	if self.ExplosionDel < CurTime( ) then
 		self:SetCollisionGroup( 3 )
 	end
 end
 
-function ENT:Dull()
+function ENT:Dull( )
 	if self.ExplodeOnce == false then
-		if self.SpriteTrail and self.SpriteTrail != NULL then
-			self.SpriteTrail:Remove()
+		if self.SpriteTrail and self.SpriteTrail ~= NULL then
+			self.SpriteTrail:Remove( )
 		end
-		
+
 		self:SetCollisionGroup( 3 )
-		
 		self.ExplodeOnce = true
-		self:Fire("kill", "", 15)
-		self:EmitSound( "weapons/rpg/shotdown.wav", 70, 100 )
-		self:GetPhysicsObject():SetVelocity( self:GetPhysicsObject():GetVelocity() * 0.2 )
+		self:Fire( "kill" , "" , 15 )
+		self:EmitSound( "weapons/rpg/shotdown.wav" , 70 , 100 )
+		self:GetPhysicsObject( ):SetVelocity( self:GetPhysicsObject( ):GetVelocity( ) * 0.2 )
 	end
 end
 
-function ENT:DoExplode()
-	if self.ExplodeOnce == false and self.ExplosionDel < CurTime() then
+function ENT:DoExplode( )
+	if self.ExplodeOnce == false and self.ExplosionDel < CurTime( ) then
 		self.ExplodeOnce = true
-	
-		local effectdata = EffectData()
-		effectdata:SetOrigin(self:GetPos())
-		util.Effect("HelicopterMegaBomb", effectdata)
-			
-		local ar2Explo = ents.Create("env_ar2explosion")
-		ar2Explo:SetOwner(self.Owner)
-		ar2Explo:SetPos(self:GetPos())
-		ar2Explo:Spawn()
-		ar2Explo:Activate()
-		ar2Explo:Fire("Explode", "", 0)
+		local effectdata = EffectData( )
+		effectdata:SetOrigin( self:GetPos( ) )
+		util.Effect( "HelicopterMegaBomb" , effectdata )
+		local ar2Explo = ents.Create( "env_ar2explosion" )
+		ar2Explo:SetOwner( self.Owner )
+		ar2Explo:SetPos( self:GetPos( ) )
+		ar2Explo:Spawn( )
+		ar2Explo:Activate( )
+		ar2Explo:Fire( "Explode" , "" , 0 )
+		local expl = ents.Create( "env_explosion" )
+		expl:SetKeyValue( "spawnflags" , 1 )
+		expl:SetPos( self:GetPos( ) )
+		expl:Spawn( )
+		expl:Fire( "explode" , "" , 0 )
+		local FireExp = ents.Create( "env_physexplosion" )
+		FireExp:SetPos( self:GetPos( ) )
+		FireExp:SetParent( self.Entity )
+		FireExp:SetKeyValue( "magnitude" , 240 )
+		FireExp:SetKeyValue( "radius" , 200 )
+		FireExp:SetKeyValue( "spawnflags" , "1" )
+		FireExp:Spawn( )
+		FireExp:Fire( "Explode" , "" , 0 )
+		FireExp:Fire( "kill" , "" , 5 )
 
-		local expl = ents.Create("env_explosion")
-		expl:SetKeyValue("spawnflags",1)
-		expl:SetPos(self:GetPos())
-		expl:Spawn()
-		expl:Fire("explode","",0)
-		
-		
-		local FireExp = ents.Create("env_physexplosion")
-		FireExp:SetPos(self:GetPos())
-		FireExp:SetParent(self.Entity)
-		FireExp:SetKeyValue("magnitude", 240)
-		FireExp:SetKeyValue("radius", 200)
-		FireExp:SetKeyValue("spawnflags", "1")
-		FireExp:Spawn()
-		FireExp:Fire("Explode", "", 0)
-		FireExp:Fire("kill", "", 5)
-		
 		if self.Attacker == NULL then
 			self.Attacker = nil
 		end
 
 		if self.Attacker then
-			util.BlastDamage( self, self.Attacker, self:GetPos(), 200, 300)
+			util.BlastDamage( self , self.Attacker , self:GetPos( ) , 200 , 300 )
 		end
-		
-		util.ScreenShake( self:GetPos(), 15, 15, 0.5, 500 )
 
-		self:Remove()
+		util.ScreenShake( self:GetPos( ) , 15 , 15 , 0.5 , 500 )
+		self:Remove( )
 	end
 end
-
 --[[
 
 ENT.Target = NULL
@@ -202,7 +180,7 @@ ENT.physeffect	= 1000
 ENT.armtime		= 2
 ENT.homing		= 1
 ENT.angchange	= 5
-	
+
 ENT.MissileTime = CurTime() + 5	
 ENT.UpdateLaserPosDel = CurTime()
 --ENT.LaserPos = NULL
@@ -237,24 +215,24 @@ function ENT:Initialize()
 	self:SetMoveType(MOVETYPE_VPHYSICS)
 	self:SetSolid(SOLID_VPHYSICS)
 
-	self:SetSolid(SOLID_VPHYSICS)	
+	self:SetSolid(SOLID_VPHYSICS) 
     local phys = self:GetPhysicsObject()
 	if(phys:IsValid()) then phys:Wake() end
 
 	 	self.EntAngs = self:GetAngles()
-		
+
 		self.ArmDel = CurTime() + self.armtime
 	util.SpriteTrail(self.Entity, 0, Color(200,200,200,255), false, 4, 0, 3, 1/(15+1)*0.5, "trails/smoke.vmt")
-	
+
 	self.MissileSound = CreateSound(self.Entity,"weapons/rpg/rocket1.wav")
 	self.MissileSound:Play()
-	--self:SetCollisionGroup( 1 )	
-	
+	--self:SetCollisionGroup( 1 ) 
+
 	--self.MissileTime = CurTime() + 10
-	
+
 	--There is a 50% chance that the missile will ignore countermeasures
 	--self.IgnoreCounterMeasure = math.random(1,50)
-	
+
 	self.ExplosionDel = CurTime() + 0.1
 	self.ExplosionDel = -1
 end
@@ -262,7 +240,7 @@ end
 -------------------------------------------PHYS COLLIDE
 function ENT:PhysicsCollide( data, phys ) 
 	ent = data.HitEntity
-	
+
 	self:Remove()
 end
 
@@ -272,8 +250,6 @@ function ENT:PhysicsUpdate( physics )
 		phys = self:GetPhysicsObject()
 		local veloc = phys:GetVelocity()
 
-		
-		
 	if self.MissileTime > CurTime() then
 		local AimVec = ( self.LaserPos - self:GetPos() ):Angle()
 		--local AimVec = self.LaserPos:GetAimVector()
@@ -281,16 +257,16 @@ function ENT:PhysicsUpdate( physics )
 		local Dist = math.min(self:GetPos():Distance(self.LaserPos), 5000)
 		local Dist = Dist / 5000
 		local Mod = (1 - Dist) * self.angchange
-		
+
 		self.EntAngs.p = math.ApproachAngle( self.EntAngs.p, AimVec.p, 0.5 + Mod )
 		self.EntAngs.r = math.ApproachAngle( self.EntAngs.r, AimVec.r, 0.5 + Mod )
 		self.EntAngs.y = math.ApproachAngle( self.EntAngs.y, AimVec.y, 0.5 + Mod )
-		self:SetAngles( self.EntAngs )									
+		self:SetAngles( self.EntAngs ) 								
 	end
-	
+
 	phys:SetVelocity(veloc)
 	phys:ApplyForceCenter(self:GetForward() * 50000 )
-	
+
 end
 -------------------------------------------THINK
 function ENT:Think()
@@ -300,8 +276,7 @@ function ENT:Think()
 	if self.ExplosionDel < CurTime() then
 		self:SetCollisionGroup( 3 )
 	end
-	
-	
+
 	/*
 	--if self.Entity.Target:IsValid() && self.TargetIsJetFighter == 0 then
 	if self.Entity.Target:IsValid() then
@@ -310,34 +285,33 @@ function ENT:Think()
 			self.Entity.Target.IsMissileTarget = 1
 		end
 	end		
-	
-	
+
 	if self.FollowCountermeasure == 0 && self.IgnoreCounterMeasure != 25 then 
-		local NewTarget =  ents.FindInSphere(  self:GetPos() , 2000)					
+		local NewTarget =  ents.FindInSphere(  self:GetPos() , 2000) 				
 		local NumberOfTargets = table.Count(NewTarget)
 		local Dist = 1000
-		
+
 		for i=1, NumberOfTargets do
 			if string.find(NewTarget[i]:GetClass(), "sent_countermeasure") && self.FollowCountermeasure == 0 then
 				if self.TargetIsJetFighter == 1 then
 					self.Entity.Target.IsMissileTarget = 0
 				end
-			
+
 				self.FollowCountermeasure = 1
 				self.Entity.Target = NewTarget[i]
 			end
 		end
 	end
-	
+
 	if self.FollowCountermeasure == 1 && self.Entity.Target != NULL then
-		local dist = self.Entity.Target:GetPos():Distance(self:GetPos())	
+		local dist = self.Entity.Target:GetPos():Distance(self:GetPos()) 
 		if dist < 150 then
 			self:Remove()
 		end
 	end
-	
+
 	*/
-	
+
 end
 
 -------------------------------------------REMOVE
@@ -351,7 +325,7 @@ function ENT:OnRemove()
 	expl:SetOwner(self:GetOwner())
 	expl:Spawn()
 	expl:Fire("explode","",0)
-	
+
 	local FireExp = ents.Create("env_physexplosion")
 	FireExp:SetPos(self:GetPos())
 	FireExp:SetParent(self.Entity)
@@ -362,12 +336,12 @@ function ENT:OnRemove()
 	FireExp:Fire("Explode", "", 0)
 	FireExp:Fire("kill", "", 5)
 	--util.BlastDamage( self:GetOwner(), self:GetOwner(), self:GetPos(), 200, 200)
-	
+
 	local effectdata = EffectData()
 	effectdata:SetOrigin( self:GetPos() )
 	effectdata:SetStart( Vector(0,0,90) )
-	util.Effect( "jetbomb_explosion", effectdata )	
-	
+	util.Effect( "jetbomb_explosion", effectdata ) 
+
 	if self.TargetIsJetFighter == 1 then
 		self.Entity.Target.IsMissileTarget = 0
 	end
@@ -383,8 +357,7 @@ function ENT:OnRemove()
 		expl:SetPos(self:GetPos())
 		expl:Spawn()
 		expl:Fire("explode","",0)
-		
-		
+
 		local FireExp = ents.Create("env_physexplosion")
 		FireExp:SetPos(self:GetPos())
 		FireExp:SetParent(self.Entity)
@@ -394,9 +367,9 @@ function ENT:OnRemove()
 		FireExp:Spawn()
 		FireExp:Fire("Explode", "", 0)
 		FireExp:Fire("kill", "", 5)
-		
+
 		self:StopSound(self.ShellTravelSnd)
-		
+
 		if self.Attacker == NULL then
 			self.Attacker = nil
 		end
@@ -404,7 +377,7 @@ function ENT:OnRemove()
 		if self.Attacker then
 			util.BlastDamage( self, self.Attacker, self:GetPos(), 200, 300)
 		end
-		
+
 		util.ScreenShake( self:GetPos(), 15, 15, 0.5, 500 )
 
 		self:Remove()
@@ -423,8 +396,7 @@ function ENT:DoExplode()
 		expl:SetPos(self:GetPos())
 		expl:Spawn()
 		expl:Fire("explode","",0)
-		
-		
+
 		local FireExp = ents.Create("env_physexplosion")
 		FireExp:SetPos(self:GetPos())
 		FireExp:SetParent(self.Entity)
@@ -434,7 +406,7 @@ function ENT:DoExplode()
 		FireExp:Spawn()
 		FireExp:Fire("Explode", "", 0)
 		FireExp:Fire("kill", "", 5)
-		
+
 		if self.Attacker == NULL then
 			self.Attacker = nil
 		end
@@ -442,7 +414,7 @@ function ENT:DoExplode()
 		if self.Attacker then
 			util.BlastDamage( self, self.Attacker, self:GetPos(), 200, 300)
 		end
-		
+
 		util.ScreenShake( self:GetPos(), 15, 15, 0.5, 500 )
 
 		self:Remove()

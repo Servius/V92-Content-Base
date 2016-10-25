@@ -2,24 +2,28 @@
 vertexlitgeneric
 {
 
-	$baseTexture		models/JesseV92/heads_hl2/hd/van2_d
-	$bumpmap			models/JesseV92/heads_hl2/hd/van_b
-	$lightwarptexture	models/jessev92/detail/w_gen
+	$baseTexture				models/JesseV92/heads_hl2/hd/van_hd_1_d
+	$bumpmap					models/JesseV92/heads_hl2/hd/van_hd_b
+	$lightwarptexture			dev/identitylightwarp
 	
-	$ambientocclusion	1
-	$halflambert		1
-	$nocull				0
-	$surfaceprop		flesh
+	$ambientocclusion			1
+	$halflambert				1
+	$nocull						0
+	$surfaceprop				flesh
 	
-	$phong					1
-	$phongexponent			25
-	$bumpmapalphaphongmask	1
-	$phongboost				1
-	$phongfresnelranges		"[0 0.5 1]"
+	$phong						1
+	$phongtint					"[ 0.8 0.6 0.4 ]"
+	$phongboost					1.0
+	$phongexponent				8
+	$phongfresnelranges			"[ 0.1 0.5 1 ]"
 	
-	$detail				models/jessev92/detail/skin1
-	$detailscale        8
-	$detailblendfactor  0.5
-	$detailblendmode	0
+	$detail						models/jessev92/detail/skin1
+	$detailscale        		7
+	$detailblendfactor  		0.4
+	$detailblendmode			0
+	
+	$rimlight					1
+	$rimlightboost				0.2
+	$rimlightexponent			4
 
 }

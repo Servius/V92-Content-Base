@@ -1,0 +1,10 @@
+
+UnlitGeneric
+{
+
+	$basetexture				jessev92/fx/muzzleflash_bf2
+	$additive					1
+	$vertexcolor				1
+	$vertexalpha				1
+
+}
