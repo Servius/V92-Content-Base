@@ -9,7 +9,7 @@ ENT.AMMOMDL = Model( "models/jessev92/items/ammo_buckshot.mdl" )
 ENT.PrintName = ( "Box of " .. ENT.AMMONAME )
 ENT.Information = "Gives " .. ENT.AMMOTOGIVE .. " rounds of " .. ENT.AMMONAME .. " Ammo"
 ENT.Author = "V92"
-ENT.Category = "92nd Dev Unit"
+ENT.Category = VNTCB.Category.VNT
 ENT.Spawnable = false
 ENT.AdminOnly = true
 

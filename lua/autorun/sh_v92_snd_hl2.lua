@@ -1,23 +1,79 @@
 
 AddCSLuaFile()
 
+-------------------------------------------------------
+--	Half-Life 2 + EP1 + EP2 + HL2DM + Lost Coast Audio
+--	Encoded by V92
+--	Profile Link:	http://steamcommunity.com/id/JesseVanover/
+--	Workshop Link:	http://steamcommunity.com/sharedfiles/filedetails/?id=655569086
+-------------------------------------------------------
+
 ---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
--- Half-Life 2
+---------------------------------------------------------------------------------------------------------------------------------------
+--	NPC
+---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 ------------------------------------------------------------------------------------------
---	HL2 :: Vehicles
 ------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+--	COMBINE SOLDIER
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+---------------------------------------------
+---------------------------------------------
+---------------------------------------------
+--	ZIPLINE
+---------------------------------------------
+---------------------------------------------
+---------------------------------------------
+
+sound.Add({	["name"] = "Combine_Soldier.ZipLine.Clip" ,
+	["channel"] = CHAN_STATIC ,
+	["volume"] = 1.0 ,
+	["level"] = 100 ,
+	["pitch"] = { 90, 110 } ,
+	["sound"] = { 
+		"jessev92/lostcoast/npc/combine_soldier/zipline_clip1.wav" ,
+		"jessev92/lostcoast/npc/combine_soldier/zipline_clip2.wav" ,
+	} ,
+} )
+
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+--	VEHICLES
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+
+---------------------------------------------
+---------------------------------------------
+--	V8
+---------------------------------------------
+---------------------------------------------
+
+sound.Add( {	["name"] = "HL2.Vehicles.V8.Gear4_Cruise" ,
+	["channel"] = CHAN_STATIC ,
+	["volume"] = 1 ,
+	["level"] = 100 ,
+	["pitch"] = { 100 } ,
+	["sound"] = { 
+		"vehicles/v8/fourth_cruise_loop2.wav" ,
+	} ,
+} )
+util.PrecacheSound( "vehicles/v8/fourth_cruise_loop2.wav" )
 
 ---------------------------------------------
 ---------------------------------------------
 --	EP2 Charger
 ---------------------------------------------
 ---------------------------------------------
-sound.Add( {
-	name = "EP2.Charger.RadarPing" ,
+sound.Add( {	name = "EP2.Charger.RadarPing" ,
 	channel = CHAN_ITEM ,
 	volume = 0.05 ,
 	level = 10 ,
@@ -26,8 +82,29 @@ sound.Add( {
 } )
 util.PrecacheSound( "vehicles/junker/radar_ping_friendly1.wav" )
 
+sound.Add( {	name = "EP2.V8.Impact_Heavy" ,
+	channel = CHAN_ITEM ,
+	volume = 1 ,
+	level = 90 ,
+	pitch = { 90 , 110 } ,
+	sound = { 
+		"^)vehicles/v8/vehicle_impact_heavy1.wav" ,
+		"^)vehicles/v8/vehicle_impact_heavy2.wav" ,
+		"^)vehicles/v8/vehicle_impact_heavy3.wav" ,
+		"^)vehicles/v8/vehicle_impact_heavy4.wav" ,
+	} ,
+} )
+util.PrecacheSound( "vehicles/v8/vehicle_impact_heavy1.wav" )
+util.PrecacheSound( "vehicles/v8/vehicle_impact_heavy2.wav" )
+util.PrecacheSound( "vehicles/v8/vehicle_impact_heavy3.wav" )
+util.PrecacheSound( "vehicles/v8/vehicle_impact_heavy4.wav" )
+
 ------------------------------------------------------------------------------------------
---	HL2 :: Voice
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+--	VOICE OVERS
+------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
 ------------------------------------------------------------------------------------------
 
 ---------------------------------------------
@@ -35,8 +112,7 @@ util.PrecacheSound( "vehicles/junker/radar_ping_friendly1.wav" )
 --	Player Coughing
 ---------------------------------------------
 ---------------------------------------------
-sound.Add( {
-	name = "HL2.VO.Player.Cough" ,
+sound.Add( {	name = "HL2.VO.Player.Cough" ,
 	channel = CHAN_VOICE ,
 	volume = 1.0 ,
 	level = 75 ,
@@ -52,8 +128,7 @@ util.PrecacheSound( "ambient/voices/cough4.wav" )
 --	HL2 :: Physics
 ------------------------------------------------------------------------------------------
 
-sound.Add( {
-	name = "HL2.Physics.Concrete.Impact.Bullet" ,
+sound.Add( {	name = "HL2.Physics.Concrete.Impact.Bullet" ,
 	channel = CHAN_BODY ,
 	level = 75 ,
 	volume = 1 ,
@@ -70,8 +145,7 @@ util.PrecacheSound( "physics/concrete/concrete_impact_bullet2.wav" )
 util.PrecacheSound( "physics/concrete/concrete_impact_bullet3.wav" )
 util.PrecacheSound( "physics/concrete/concrete_impact_bullet4.wav" )
 
-sound.Add( {
-	name = "HL2.Physics.Glass.Impact.Bullet" ,
+sound.Add( {	name = "HL2.Physics.Glass.Impact.Bullet" ,
 	channel = CHAN_BODY ,
 	level = 75 ,
 	volume = 1 ,
@@ -88,8 +162,7 @@ util.PrecacheSound( "physics/Glass/glass_impact_bullet2.wav" )
 util.PrecacheSound( "physics/Glass/glass_impact_bullet3.wav" )
 util.PrecacheSound( "physics/Glass/glass_impact_bullet4.wav" )
 
-sound.Add( {
-	name = "HL2.Physics.Flesh.Impact.Bullet" ,
+sound.Add( {	name = "HL2.Physics.Flesh.Impact.Bullet" ,
 	channel = CHAN_BODY ,
 	level = 75 ,
 	volume = 1 ,
@@ -108,8 +181,7 @@ util.PrecacheSound( "physics/flesh/flesh_impact_bullet3.wav" )
 util.PrecacheSound( "physics/flesh/flesh_impact_bullet4.wav" )
 util.PrecacheSound( "physics/flesh/flesh_impact_bullet5.wav" )
 
-sound.Add( {
-	name = "HL2.Physics.Computer.Impact.Bullet" ,
+sound.Add( {	name = "HL2.Physics.Computer.Impact.Bullet" ,
 	channel = CHAN_BODY ,
 	level = 75 ,
 	volume = 1 ,
@@ -124,8 +196,7 @@ util.PrecacheSound( "physics/metal/metal_computer_impact_bullet1.wav" )
 util.PrecacheSound( "physics/metal/metal_computer_impact_bullet2.wav" )
 util.PrecacheSound( "physics/metal/metal_computer_impact_bullet3.wav" )
 
-sound.Add( {
-	name = "HL2.Physics.Metal.Box.Impact.Bullet" ,
+sound.Add( {	name = "HL2.Physics.Metal.Box.Impact.Bullet" ,
 	channel = CHAN_BODY ,
 	level = 75 ,
 	volume = 1 ,

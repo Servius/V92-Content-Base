@@ -1,0 +1,25 @@
+
+VertexlitGeneric
+{
+
+	$basetexture					models/jessev92/bf4/vehicles/missiles/jdam_d
+	$bumpmap						dev/bump_normal
+	$lightwarptexture				dev/identitylightwarp
+	
+	$ambientocclusion				1
+	$halflambert					1
+	$nocull							1
+
+	$phong							1
+	$phongexponent					75
+	$phongexponenttexture			dev/bump_dudv
+	$phongboost						0.15
+	$phongfresnelranges				"[ 1 1 1 ]"
+	$phongalbedotint				1
+	
+	$detail          			   	detail/metal_detail_01
+	$detailscale					4
+	$detailblendfactor				0.25
+	$detailblendmode				0
+
+}

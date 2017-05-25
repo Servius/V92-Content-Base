@@ -1,0 +1,29 @@
+
+VertexLitGeneric
+{
+
+	$baseTexture				models/jessev92/bf3/vehicles/common/minigun_d
+	$bumpmap					models/jessev92/bf3/vehicles/common/minigun_b
+
+	$halflambert				1
+	$ambientocclusion			1
+
+	$phong						1
+	$phongexponent				1.77
+	$phongalbedotint			1
+	$phongalbedoboost			1
+	$phongboost					0
+ 	//$phongtint					"[ 0.7 0.9 1 ]"
+ 	$phongfresnelranges			"[ 1 1 1 ]"
+ 	$phongexponenttexture		models/jessev92/bf3/vehicles/common/minigun_x
+	
+	$rimlight					1
+	$rimlightexponent			34.5
+	$rimlightboost				0.2
+	
+	$detail						detail/metal_detail_01
+	$detailscale				24
+	$detailblendfactor			0.25
+	$detailblendmode			4
+	
+}

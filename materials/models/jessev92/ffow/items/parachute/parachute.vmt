@@ -1,0 +1,28 @@
+
+//	Parachute, Kaos Studios
+//	Texture @ Kaos Studios
+//	Shaders @ Reverend V92
+//	Update: 2017/03/31
+
+VertexLitGeneric
+{
+
+	$basetexture models/jessev92/ffow/items/parachute/parachute_d
+	$bumpmap models/jessev92/ffow/items/parachute/parachute_b
+	$lightwarptexture dev/identitylightwarp
+	
+	$halflambert 1
+	$ambientocclusion 1
+	$ambientoccltexture models/jessev92/ffow/items/parachute/parachute_a
+	
+	$phong 1
+	$phongexponenttexture models/jessev92/ffow/items/parachute/parachute_x
+	$phongexponent 1
+	$phongboost 1
+	
+	$detail models/jessev92/detail/cloth
+	$detailscale 16
+	$detailblendfactor 1
+	$detailblendmode 0
+
+}

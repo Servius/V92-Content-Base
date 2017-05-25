@@ -1,0 +1,12 @@
+"VertexlitGeneric"
+{
+$basetexture "models/jessev92/payday2/items/lootbags/item_bag_loot_d"
+$bumpmap "models/jessev92/payday2/items/lootbags/item_bag_loot_n"
+$halflambert "1"	
+$phongexponent "3"
+$phongfresnelranges	"[1 8 13]"
+$phong 1
+$phongboost .5
+$phongtint "[1 1 1]"
+$ambientocclusion 1
+}

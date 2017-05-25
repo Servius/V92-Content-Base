@@ -1,6 +1,33 @@
 
 AddCSLuaFile( )
 
+------------------------------
+------------------------------
+--	TYPES OF SHELLS
+------------------------------
+------------------------------
+--	1 = 10x25mm Auto
+--	2 = 12-Gauge
+--	3 = .380 ACP
+--	4 = .45 ACP
+--	5 = .50 AE
+--	6 = .50 BMG
+--	7 = 5.45x39mm Warsaw Pact
+--	8 = 7.62x25mm Warsaw Pact
+--	9 = 7.62x33mm Warsaw Pact
+--	10 = 7.62x39mm Warsaw Pact
+--	11 = 7.62x54mm Warsaw Pact
+--	12 = 7.92x57mm Warsaw Pact
+--	13 = 9x18mm Warsaw Pact
+--	14 = 9x19mm NATO
+--	15 = 5.56x45mm NATO
+--	16 = 5.56x45mm NATO 1st Belt Link
+--	17 = 5.56x45mm NATO Belt Link
+--	18 = 7.62x51mm NATO
+--	19 = 7.62x51mm NATO 1st Belt Link
+--	20 = 7.62x51mm NATO Belt Link
+--	21 = M1 Garand En Bloc Clip
+
 EFFECT.Models = { }
 EFFECT.Sounds = { }
 
@@ -28,7 +55,7 @@ EFFECT.Sounds[ 7 ] = { Pitch = 95 , Wavs = { "player/pl_shell1.wav" , "player/pl
 EFFECT.Models[ 8 ] = Model( "models/JesseV92/items/shells/762x25mm.mdl" )
 EFFECT.Sounds[ 8 ] = { Pitch = 90 , Wavs = { "player/pl_shell1.wav" , "player/pl_shell2.wav" , "player/pl_shell3.wav" } }
 
-EFFECT.Models[ 9 ] = Model( "models/JesseV92/items/shells/762x33mm.mdl" )
+EFFECT.Models[ 9 ] = Model( "models/JesseV92/items/shells/792x33mm.mdl" )
 EFFECT.Sounds[ 9 ] = { Pitch = 92 , Wavs = { "player/pl_shell1.wav" , "player/pl_shell2.wav" , "player/pl_shell3.wav" } }
 
 EFFECT.Models[ 10 ] = Model( "models/JesseV92/items/shells/762x39mm.mdl" )
@@ -64,6 +91,9 @@ EFFECT.Sounds[ 19 ] = { Pitch = 105 , Wavs = { "player/pl_shell1.wav" , "player/
 EFFECT.Models[ 20 ] = Model( "models/JesseV92/items/shells/762link.mdl" )
 EFFECT.Sounds[ 20 ] = { Pitch = 105 , Wavs = { "player/pl_shell1.wav" , "player/pl_shell2.wav" , "player/pl_shell3.wav" } }
 
+EFFECT.Models[ 21 ] = Model( "models/JesseV92/items/shells/garand_clip.mdl" )
+EFFECT.Sounds[ 21 ] = { Pitch = 80 , Wavs = { "player/pl_shell1.wav" , "player/pl_shell2.wav" , "player/pl_shell3.wav" } }
+
 function EFFECT:Init( data )
 	if not IsValid( data:GetEntity( ) ) then
 		self:SetModel( Model( "models/JesseV92/items/shells/556x45mm.mdl" ) )
@@ -72,9 +102,10 @@ function EFFECT:Init( data )
 		return
 	end
 
-	local bullettype = math.Clamp( ( data:GetScale( ) or 1 ) , 1 , 20 )
+	local bullettype = math.Clamp( ( data:GetScale( ) or 1 ) , 1 , 21 )
 	local angle , pos = self:GetBulletEjectPos( data:GetOrigin( ) , data:GetEntity( ) , data:GetAttachment( ) )
 	local direction = angle:Forward( )
+	local directionUp = angle:Up( )
 	local ang = LocalPlayer( ):GetAimVector( ):Angle( )
 	self:SetPos( pos )
 	self:SetModel( self.Models[ bullettype ] or Model( "models/JesseV92/items/shells/556x45mm.mdl" ) )
@@ -86,7 +117,11 @@ function EFFECT:Init( data )
 	if IsValid( phys ) then
 		phys:Wake( )
 		phys:SetDamping( 0 , 15 )
-		phys:SetVelocity( direction * math.random( 100 , 125 ) )
+		if bullettype == 21 then
+			phys:SetVelocity( direction * math.random( 356 , 364 ) )
+		else
+			phys:SetVelocity( direction * math.random( 100 , 125 ) )
+		end
 		phys:AddAngleVelocity( ( VectorRand( ) * 500 ) )
 		phys:SetMaterial( "gmod_silent" )
 	end
@@ -96,7 +131,7 @@ function EFFECT:Init( data )
 	self.HitPitch = self.Sounds[ bullettype ].Pitch + math.random( -10 , 10 )
 	self.SoundTime = CurTime( ) + math.Rand( 0.5 , 0.75 )
 	
-	local ShellTime = GetConVarNumber( "VNT_SWep_Base_ShellTime" )
+	local ShellTime = GetConVarNumber( "VNT_Base_SWep_ShellTime" )
 	self.LifeTime = CurTime( ) + ShellTime
 	self.Alpha = 255
 end
@@ -127,7 +162,7 @@ function EFFECT:Think( )
 
 	if self.SoundTime and self.SoundTime < CurTime( ) then
 		self.SoundTime = nil
-		sound.Play( self.HitSound , self:GetPos( ) , 75 , self.HitPitch )
+		self:EmitSound( self.HitSound , self:GetPos( ) , 50 , self.HitPitch )
 	end
 
 	if self.LifeTime < CurTime( ) then

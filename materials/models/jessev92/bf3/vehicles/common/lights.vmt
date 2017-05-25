@@ -1,0 +1,19 @@
+
+VertexlitGeneric
+{
+
+	$basetexture					models/jessev92/bf3/vehicles/common/lights_d
+	$bumpmap						dev/bump_normal
+	$lightwarptexture				dev/identitylightwarp
+	
+	$ambientocclusion				1
+	$halflambert					1
+	$translucent					0	
+	$nocull							1
+	
+	$detail							detail/metal_detail_01
+	$detailscale					4
+	$detailblendfactor				0.25
+	$detailblendmode				0
+	
+}

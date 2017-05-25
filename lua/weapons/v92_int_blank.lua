@@ -12,7 +12,7 @@ SWEP.AdminOnly = true -- (Boolean) Admin only spawnable
 SWEP.WeaponName = "v92_int_blank" -- (String) Name of the weapon script
 SWEP.WeaponEntityName = "v92_int_blank" -- (String) Name of the weapon entity in Lua/Entities/Entityname.lua
 SWEP.PrintName = "Blank" -- (String) Printed name on menu
-SWEP.Category = "92nd Dev Unit" -- (String) Category
+SWEP.Category = VNTCB.Category.VNT -- (String) Category
 SWEP.Instructions = "$Recycle.Bin" -- (String) Instruction
 SWEP.Author = "V92" -- (String) Author
 SWEP.Contact = "V92" -- (String) Contact
@@ -34,8 +34,8 @@ SWEP.AutoSwitchTo = false
 SWEP.AutoSwitchFrom = true
 SWEP.Weight = 0
 SWEP.UseHands = false
-SWEP.ViewModel = Model( "" )
-SWEP.WorldModel = Model( "" )
+SWEP.ViewModel = Model( "models/jessev92/weapons/sprinting_c.mdl" )
+SWEP.WorldModel = ""
 SWEP.HoldType = "normal"
 SWEP.Primary.Ammo = "none"
 SWEP.Primary.ClipSize = -1
@@ -44,7 +44,7 @@ SWEP.Secondary.Automatic = false
 SWEP.Secondary.ClipSize = -1
 
 function SWEP:Initialize( )
-	self:SetWeaponHoldType( self.HoldType )
+	self:SetHoldType( self.HoldType )
 end
 
 function SWEP:Think( )
